@@ -15,7 +15,7 @@ def correct_slow_solution(A):
 
     return min(difference)
 
-def solution(A):
+def fails_small_solution(A):
     # looks like I forgot about the last element or something because it's not 100% correct
 
     total = sum(A)
@@ -31,4 +31,28 @@ def solution(A):
             min_diff = diff
         
     return min_diff
+
+# ARGH! Wasn't working because min_diff was too low! I even thought about 2000 as the limit
+# when looking at the problem.
+
+def solution(A):
+    
+    total = sum(A)
+    remaining_total = total
+    running_total = 0
+    min_diff = 1000
+    
+    for i in range(0, len(A)-1):
+        remaining_total -= A[i]
+        running_total += A[i]
+        diff = abs(running_total - remaining_total)
+        if diff < min_diff:
+            min_diff = diff
+            
+    diff = abs(A[-1] - running_total)
+    if diff < min_diff:
+        min_diff = diff
+
+    return min_diff
+
 
